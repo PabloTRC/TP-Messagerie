@@ -2,14 +2,16 @@ from fastapi import FastAPI
 from sqlmodel import create_engine
 from sqlmodel import SQLModel
 
-#Partie 1 : 
+#Partie 1 : Mise en place du projet
 
-sqlite_file_name = "messagerie.db"
-sqlite_url = f"sqlite:///{sqlite_file_name}"
-engine = create_engine(sqlite_url, echo=False) # echo=False pour garder la console propre
+#Je configure la base de données SQL d'abord
+nom_fichier= "messagerie.db"
+url= f"sqlite:///{nom_fichier}"
+console =create_engine(url, echo=False) #echo=False pour garder la console propre
 
+#Création de tables sql
 def create_db_and_tables():
-    SQLModel.metadata.create_all(engine)
+    SQLModel.metadata.create_all(console)
 
 # Lifespan : Initialise la BDD au démarrage de l'API
 @asynccontextmanager
